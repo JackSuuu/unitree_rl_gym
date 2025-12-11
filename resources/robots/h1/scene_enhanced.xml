@@ -1,0 +1,74 @@
+<mujoco model="h1 enhanced scene">
+  <include file="h1.xml"/>
+
+  <statistic center="1.0 0.7 1.0" extent="10"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.1 0.1 0.1" specular="0.9 0.9 0.9"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="-140" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="flat" rgb1="0 0 0" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    
+    <!-- Materials for environment objects -->
+    <material name="furniture" rgba="0.6 0.4 0.3 1"/>
+    <material name="object_mat" rgba="0.8 0.6 0.4 1"/>
+  </asset>
+
+  <worldbody>
+    <light pos="1 0 3.5" dir="0 0 -1" directional="true"/>
+    <light pos="5 3 3" dir="-1 -0.5 -1" directional="false"/>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+    
+    <!-- Kitchen Area (target: 5.0, 3.0) -->
+    <body name="kitchen_counter" pos="5.0 3.0 0.5">
+      <geom type="box" size="0.8 0.4 0.5" material="furniture" mass="50"/>
+      <geom type="box" size="0.7 0.35 0.05" pos="0 0 0.55" rgba="0.3 0.3 0.3 1"/>
+    </body>
+    
+    <body name="kitchen_cabinet" pos="5.5 3.8 0.8">
+      <geom type="box" size="0.4 0.3 0.8" material="furniture" mass="30"/>
+    </body>
+    
+    <!-- Bedroom Area (target: -3.0, 6.0) -->
+    <body name="bed" pos="-3.0 6.0 0.3">
+      <geom type="box" size="1.0 0.8 0.3" rgba="0.4 0.5 0.6 1" mass="60"/>
+      <geom type="box" size="0.9 0.7 0.15" pos="0 0 0.45" rgba="0.9 0.9 0.9 1"/>
+    </body>
+    
+    <body name="nightstand" pos="-2.0 7.0 0.25">
+      <geom type="box" size="0.3 0.3 0.25" material="furniture" mass="15"/>
+    </body>
+    
+    <!-- Living Room Area (target: 0.0, -4.0) -->
+    <body name="couch" pos="0.0 -4.0 0.35">
+      <geom type="box" size="1.2 0.6 0.35" rgba="0.3 0.4 0.5 1" mass="50"/>
+      <geom type="box" size="1.1 0.5 0.25" pos="0 0 0.6" rgba="0.35 0.45 0.55 1"/>
+    </body>
+    
+    <body name="coffee_table" pos="0.0 -2.5 0.2">
+      <geom type="box" size="0.6 0.4 0.2" material="furniture" mass="20"/>
+      <geom type="box" size="0.55 0.35 0.02" pos="0 0 0.22" rgba="0.7 0.7 0.7 1"/>
+    </body>
+    
+    <!-- Manipulable Objects -->
+    <body name="cube_1" pos="5.0 3.5 1.2">
+      <freejoint/>
+      <geom type="box" size="0.05 0.05 0.05" rgba="0.8 0.2 0.2 1" mass="0.1"/>
+    </body>
+    
+    <body name="cube_2" pos="0.0 -2.3 0.45">
+      <freejoint/>
+      <geom type="box" size="0.04 0.04 0.04" rgba="0.2 0.8 0.2 1" mass="0.08"/>
+    </body>
+    
+    <body name="sphere_1" pos="-3.0 6.5 0.65">
+      <freejoint/>
+      <geom type="sphere" size="0.04" rgba="0.2 0.2 0.8 1" mass="0.05"/>
+    </body>
+  </worldbody>
+</mujoco>
